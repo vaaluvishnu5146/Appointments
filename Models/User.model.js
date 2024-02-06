@@ -13,6 +13,10 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  password: {
+    type: String,
+    required: true,
+  },
   emergencyEmail: {
     type: String,
     required: false,
@@ -23,45 +27,45 @@ const UserSchema = mongoose.Schema({
   },
   aadharNumber: {
     type: String,
-    required: true,
+    required: false,
   },
   addressDetails: {
     addressLine1: {
       type: String,
-      required: true,
+      required: false,
     },
     addressLine2: {
       type: String,
-      required: true,
+      required: false,
     },
     town: {
       type: String,
-      required: true,
+      required: false,
     },
     city: {
       type: String,
-      required: true,
+      required: false,
     },
     state: {
       type: String,
-      required: true,
+      required: false,
     },
     pincode: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   bloodGroup: {
     type: String,
-    required: true,
+    required: false,
   },
   gender: {
     type: String,
-    required: true,
+    required: false,
   },
   age: {
     type: Number,
-    required: true,
+    required: false,
   },
   isKYCCompleted: {
     type: String,
@@ -70,6 +74,10 @@ const UserSchema = mongoose.Schema({
   profileImage: {
     type: String,
     required: false,
+  },
+  roles: {
+    type: Array,
+    default: ["patient"],
   },
 });
 

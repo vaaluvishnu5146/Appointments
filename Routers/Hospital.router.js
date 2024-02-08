@@ -1,6 +1,7 @@
 const {
   createHospital,
   getDocbyHospitalId,
+  getAllHospitals,
 } = require("../Controllers/Hospital.controller");
 
 const HospitalRouter = require("express").Router();
@@ -10,5 +11,8 @@ HospitalRouter.post("/create", createHospital);
 
 // 2. Get all doctors for the hospital
 HospitalRouter.get("/:hospitalId/doctors", getDocbyHospitalId);
+
+// 3. Get all doctors for the hospital
+HospitalRouter.get("/all", getAllHospitals);
 
 module.exports = HospitalRouter;

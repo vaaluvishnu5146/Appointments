@@ -1,4 +1,6 @@
+const AppointmentModel = require("../Models/Appointment.model");
 const DoctorModel = require("../Models/Doctor.model");
+const { generateTimeSlots } = require("../utils/Time");
 
 function createDoctor(req, res, next) {
   const payload = req.body;
@@ -85,8 +87,40 @@ function getDocbyId(req, res, next) {
     });
 }
 
+async function getDocSlotsAvailable(req, res, next) {
+  const { appointmentDate = "", doctorId = "" } = req.body;
+  const Appointments = await AppointmentModel.find({
+    appointmentDate: appointmentDate,
+    doctorId: doctorId,
+  });
+  const slotsAvailableEveryDay = generateTimeSlots([
+    { startTime: "10:00", endTime: "14:00" },
+    { startTime: "16:00", endTime: "17:00" },
+  ]);
+  const timeSlotsBookedAlready = Appointments.map(
+    (appointment, index) => appointment.timeSlot
+  );
+  const balanceSlotsAvailable = [];
+
+  slotsAvailableEveryDay.forEach((slot) => {
+    if (timeSlotsBookedAlready.indexOf(slot) < 0) {
+      balanceSlotsAvailable.push(slot);
+    }
+  });
+
+  console.log(
+    slotsAvailableEveryDay,
+    timeSlotsBookedAlready,
+    balanceSlotsAvailable
+  );
+  return res.status(200).json({
+    message: "Success",
+  });
+}
+
 module.exports = {
   createDoctor,
   getAllDocs,
   getDocbyId,
+  getDocSlotsAvailable,
 };

@@ -2,6 +2,7 @@ const AppointmentModel = require("../Models/Appointment.model");
 
 function createAppointment(req, res, next) {
   const payload = req.body;
+  console.log(payload);
   const Appointment = AppointmentModel(payload);
 
   Appointment.save()

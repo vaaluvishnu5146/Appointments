@@ -60,7 +60,35 @@ function getDocbyHospitalId(req, res, next) {
     });
 }
 
+function getAllHospitals(req, res, next) {
+  HospitalModel.find()
+    .then((response) => {
+      if (response && response.length > 0) {
+        return res.status(201).json({
+          success: true,
+          data: response,
+          message: "Hospitals fetched successfully",
+        });
+      } else {
+        return res.status(500).json({
+          success: true,
+          message: "No Hospitals found",
+        });
+      }
+    })
+    .catch((error) => {
+      if (error) {
+        return res.status(400).json({
+          success: false,
+          message: "Something went wrong",
+          error: error,
+        });
+      }
+    });
+}
+
 module.exports = {
   createHospital,
   getDocbyHospitalId,
+  getAllHospitals,
 };

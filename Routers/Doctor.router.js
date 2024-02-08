@@ -2,6 +2,7 @@ const {
   createDoctor,
   getAllDocs,
   getDocbyId,
+  getDocSlotsAvailable,
 } = require("../Controllers/Doctor.controller");
 const { getDocbyHospitalId } = require("../Controllers/Hospital.controller");
 
@@ -16,5 +17,7 @@ DoctorRouter.get("/", getAllDocs);
 DoctorRouter.get("/:docId", getDocbyId);
 // 4. Get doctor for particular hospital
 DoctorRouter.get("/hospital/:hospitalId/", getDocbyHospitalId);
+// 5. Get doctor slots
+DoctorRouter.post("/slots/", getDocSlotsAvailable);
 
 module.exports = DoctorRouter;

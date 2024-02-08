@@ -37,6 +37,10 @@ const AppointmentSchema = mongoose.Schema({
     type: Number,
     required: false,
   },
+  timeSlot: {
+    type: String,
+    required: true,
+  },
 });
 
 const AppointmentModel = mongoose.model("appointment", AppointmentSchema);
